@@ -115,10 +115,10 @@ return [
         'cluster' => env('REDIS_CLUSTER', false),
 
         'default' => [
-            'host'     => env('REDIS_HOST', '47.98.234.95'),
+            'host'     => env('REDIS_HOST', '47.99.65.138'),
             'port'     => env('REDIS_PORT', 6379),
             'database' => env('REDIS_DATABASE', 0),
-            'password' => env('REDIS_PASSWORD', 'yl789oo'),
+            'password' => env('REDIS_PASSWORD', 'UF3HEQd8'),
         ],
 
     ],
