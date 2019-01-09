@@ -41,12 +41,8 @@ class OrderNumlogReorganize extends BaseReorganize {
 
     public function addOrderNumlogdbIncrementnum(){
         $tableLastId = $this->getLastId();
-
         $insertNum = config('generator.order_init_num') + $tableLastId;
-
         $genNumArr = $this->generateNum($insertNum);
-        pj($genNumArr,1);
-
         $insertRes = $this->insertDatas($genNumArr);
     }
 
