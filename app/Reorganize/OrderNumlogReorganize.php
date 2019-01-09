@@ -43,9 +43,10 @@ class OrderNumlogReorganize extends BaseReorganize {
         $tableLastId = $this->getLastId();
 
         $insertNum = config('generator.order_init_num') + $tableLastId;
-        echo $insertNum;exit;
 
         $genNumArr = $this->generateNum($tableLastId+1);
+        pj($genNumArr,1);
+
         $insertRes = $this->insertDatas($genNumArr);
     }
 
