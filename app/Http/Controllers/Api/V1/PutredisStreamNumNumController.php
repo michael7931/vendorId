@@ -21,12 +21,12 @@ class PutredisStreamNumNumController extends BaseController{
         $redis = new redis();
         foreach ($nums as $v) {
             $res = $redis->rpush( config('generator.stream_redis_key') , $v['nums']);
-//            $delIdArr[] = $v['id'];
+            $delIdArr[] = $v['id'];
         }
 
-//        if( isset($delIdArr) ){
-//            $snR->delByid($delIdArr);
-//        }
+        if( isset($delIdArr) ){
+            $snR->delByid($delIdArr);
+        }
     }
 
     public function checkStreamNum(){

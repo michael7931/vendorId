@@ -76,7 +76,15 @@ class StreamNumlogReorganize extends BaseReorganize {
         return $res ? $res : false;
     }
 
-
+    public function delByNums($nums){
+        if (!$nums) return false;
+        $updata = [
+            'updated_at' => time(),
+            'deleted_at' => time(),
+        ];
+        $numModel = new StreamNumlog();
+        $res      = $numModel->where('nums','=', $nums)->update($updata);
+    }
 
 
 

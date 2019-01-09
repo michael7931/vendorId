@@ -10,10 +10,10 @@ class GetNumsController extends BaseController{
 
 
     public function getGenid($type){
+        $redis = new redis();
 
         switch($type){
             case 1: //订单号码出栈
-                $redis = new redis();
                 $num = $redis->lpop(  config('generator.order_redis_key')  );
                 if(empty($num)){
                     $this->returnErrorResponse(4000,'号码不足，请联系管理员补充号码。邮件2230538502@qq.com');
@@ -23,8 +23,13 @@ class GetNumsController extends BaseController{
                 $this->returnSuccessResponse($num);
                 break;
             case 2:
-                echo '222';
-
+                $num = $redis->lpop(  config('generator.stream_redis_key')  );
+                if(empty($num)){
+                    $this->returnErrorResponse(4000,'号码不足，请联系管理员补充号码。邮件2230538502@qq.com');
+                }
+                $streamNumsModel = new snR();
+                $streamNumsModel->delByNums($num);
+                $this->returnSuccessResponse($num);
                 break;
             default:
                 echo 'asf';
