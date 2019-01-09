@@ -12,5 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    echo 'fuck you';
+//    return $router->app->version();
 });
+
+

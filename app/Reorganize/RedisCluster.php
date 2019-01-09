@@ -125,6 +125,9 @@ class RedisCluster{
         return Redis::LLEN($key);
     }
 
+    public function rpop($key){
+        return Redis::rpop($key);
+    }
 
 
 

@@ -26,14 +26,6 @@ $api->version('v1', [
     'limit' => 20, 'expires' => 1,
 ], function ($api) {
 
-    $api->get('test', [
-        'uses' => 'GeneratorController@test',
-    ]);
-
-    $api->get('generatenum', [
-        'uses' => 'GeneratorController@generateNum',
-    ]);
-
     //1001生成订单号码插入数据库
     $api->get('addOrderNumlogdbIncrementnum', [
         'uses' => 'GeneratorController@addOrderNumlogdbIncrementnum',
@@ -43,7 +35,6 @@ $api->version('v1', [
     $api->get('addStreamNumlogdbIncrementnumd', [
         'uses' => 'GeneratorController@addStreamNumlogdbIncrementnumd',
     ]);
-
 
     //1003放入redis订单号
     $api->get('handleOrderNum', [
@@ -56,51 +47,13 @@ $api->version('v1', [
         'uses' => 'PutredisStreamNumNumController@handleStreamNum',
     ]);
 
-
-
-
-    //---------------------------------------------
-    // Auth
-    // login
-    $api->post('authorizations', [
-        'as' => 'authorizations.store',
-        'uses' => 'AuthController@store',
+    //1005获取号码
+    $api->get('genid/{type}', [
+        'uses' => 'GetNumsController@getGenid',
     ]);
 
-    // User
-    $api->post('users', [
-        'as' => 'users.store',
-        'uses' => 'UserController@store',
-    ]);
-    // user list
-    $api->get('users', [
-        'as' => 'users.index',
-        'uses' => 'UserController@index',
-    ]);
-    // user detail
-    $api->get('users/{id}', [
-        'as' => 'users.show',
-        'uses' => 'UserController@show',
-    ]);
 
-    // POST
-    // post list
-    $api->get('posts', [
-        'as' => 'posts.index',
-        'uses' => 'PostController@index',
-    ]);
-    // post detail
-    $api->get('posts/{id}', [
-        'as' => 'posts.show',
-        'uses' => 'PostController@show',
-    ]);
 
-    // POST COMMENT
-    // post comment list
-    $api->get('posts/{postId}/comments', [
-        'as' => 'posts.comments.index',
-        'uses' => 'CommentController@index',
-    ]);
 
     /*
      * 对于authorizations 并没有保存在数据库，所以并没有id，那么对于
@@ -112,8 +65,6 @@ $api->version('v1', [
         'as' => 'authorizations.update',
         'uses' => 'AuthController@update',
     ]);
-
-
 
 
     // need authentication
@@ -129,65 +80,7 @@ $api->version('v1', [
             'uses' => 'AuthController@destroy',
         ]);
 
-        // USER
-        // my detail
-        $api->get('user', [
-            'as' => 'user.show',
-            'uses' => 'UserController@userShow',
-        ]);
-
-        // update part of me
-        $api->patch('user', [
-            'as' => 'user.update',
-            'uses' => 'UserController@patch',
-        ]);
-        // update my password
-        $api->put('user/password', [
-            'as' => 'user.password.update',
-            'uses' => 'UserController@editPassword',
-        ]);
-
-        // POST
-        // user's posts index
-        $api->get('user/posts', [
-            'as' => 'user.posts.index',
-            'uses' => 'PostController@userIndex',
-        ]);
-        // create a post
-        $api->post('posts', [
-            'as' => 'posts.store',
-            'uses' => 'PostController@store',
-        ]);
-        // update a post
-        $api->put('posts/{id}', [
-            'as' => 'posts.update',
-            'uses' => 'PostController@update',
-        ]);
-        // update part of a post
-        $api->patch('posts/{id}', [
-            'as' => 'posts.patch',
-            'uses' => 'PostController@patch',
-        ]);
-        // delete a post
-        $api->delete('posts/{id}', [
-            'as' => 'posts.destroy',
-            'uses' => 'PostController@destroy',
-        ]);
-
-        // POST COMMENT
-        // create a comment
-        $api->post('posts/{postId}/comments', [
-            'as' => 'posts.comments.store',
-            'uses' => 'CommentController@store',
-        ]);
-        $api->put('posts/{postId}/comments/{id}', [
-            'as' => 'posts.comments.update',
-            'uses' => 'CommentController@update',
-        ]);
-        // delete a comment
-        $api->delete('posts/{postId}/comments/{id}', [
-            'as' => 'posts.comments.destroy',
-            'uses' => 'CommentController@destroy',
-        ]);
     });
+
+
 });

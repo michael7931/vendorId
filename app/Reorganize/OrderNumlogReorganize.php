@@ -65,7 +65,6 @@ class OrderNumlogReorganize extends BaseReorganize {
     public function delByid($arr=[]){
         if (  !is_array($arr) ) return false;
         $numModel = new OrderNumlog();
-//        $res = $numModel->whereIn('id',$arr)->delete();
         foreach ($arr as $value) {
             $updata = [
                 'updated_at' => time(),
@@ -75,6 +74,16 @@ class OrderNumlogReorganize extends BaseReorganize {
         }
 
         return $res?$res:false;
+    }
+
+    public function delByNums($nums){
+        if (!$nums) return false;
+        $updata = [
+            'updated_at' => time(),
+            'deleted_at' => time(),
+        ];
+        $numModel = new OrderNumlog();
+        $res      = $numModel->where('nums','=', $nums)->update($updata);
     }
 
 

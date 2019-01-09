@@ -21,12 +21,12 @@ class PutredisOrderNumController extends BaseController{
         $redis = new redis();
         foreach ($nums as $v) {
             $res = $redis->rpush( config('generator.order_redis_key') , $v['nums']);
-            $delIdArr[] = $v['id'];
+//            $delIdArr[] = $v['id'];
         }
 
-        if( isset($delIdArr) ){
-            $onR->delByid($delIdArr);
-        }
+//        if( isset($delIdArr) ){
+//            $onR->delByid($delIdArr);
+//        }
     }
 
     public function checkOrderNum(){
