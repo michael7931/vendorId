@@ -52,7 +52,9 @@ $api->version('v1', [
 //        'uses' => 'GetNumsController@getGenid',
 //    ]);
 
-
+    $api->get('xgenid', [
+        'uses' => 'GetNumsController@xgetGenid',
+    ]);
 
 
     /*

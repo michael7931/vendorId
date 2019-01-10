@@ -49,8 +49,33 @@ class GetNumsController extends BaseController{
     }
 
 
+    public function xgetGenid(){
+        $url = 'http://fh.yilian1.com/genid/1';
+
+//        for ( $i=1 ;$i < 200;$i++) {
+            $file_contents  = $this->HttpGet($url);
+//        }
 
 
+//        pj($file_contents,1);
+        echo $file_contents;
+    }
+
+    public function HttpGet($url){
+        $curl = curl_init ();
+        curl_setopt ( $curl, CURLOPT_URL, $url );
+        curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, true );
+        // curl_setopt ( $curl, CURLOPT_TIMEOUT, 500 );
+        // curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36');
+
+        //如果用的协议是https则打开鞋面这个注释
+        //curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, false );
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        $res = curl_exec ( $curl );
+        curl_close ( $curl );
+        return $res;
+    }
 
 
 
