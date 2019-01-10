@@ -29,41 +29,22 @@ class PutredisStreamNumNumController extends BaseController{
         }
     }
 
-    public function checkStreamNum(){
+    public function checkRedisStreamNum(){
         $redis = new redis();
-        $len = $redis->llen('StreamNum');
+        $len = $redis->llen( config('generator.stream_redis_key')  );
         return $len?$len:0;
     }
 
 
 
     public function handleStreamNum(){
-        $len = $this->checkStreamNum();
+        $len = $this->checkRedisStreamNum();
 
         if ($len <= config('generator.stream_redis_len_limit') ){
             $this->putRedisStreamNum();
         }
 
     }
-
-
-
-
-
-//    public function putRedisStreamNum(){
-//        $snR = new snR();
-//        $nums = $snR->getStreamNum();
-//
-//        $redis = new redis();
-//        foreach ($nums as $v) {
-//            $redis->lPush('StreamNum', $v['nums']);
-//        }
-//    }
-
-
-
-
-
 
 
 

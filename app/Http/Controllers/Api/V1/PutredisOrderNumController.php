@@ -29,16 +29,16 @@ class PutredisOrderNumController extends BaseController{
         }
     }
 
-    public function checkOrderNum(){
+    public function checkRedisOrderNum(){
         $redis = new redis();
-        $len = $redis->llen('orderNum');
+        $len = $redis->llen( config('generator.order_redis_key') );
         return $len?$len:0;
     }
 
 
 
     public function handleOrderNum(){
-        $len = $this->checkOrderNum();
+        $len = $this->checkRedisOrderNum();
 
         if ($len <= config('generator.order_redis_len_limit') ){
             $this->putRedisOrderNum();

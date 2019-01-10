@@ -8,8 +8,13 @@ use App\Reorganize\StreamNumlogReorganize as snR;
 
 class GetNumsController extends BaseController{
 
+    public function getGenidd(){
+        echo 'asg111';exit;
+
+    }
 
     public function getGenid($type){
+
         $redis = new redis();
 
         switch($type){
@@ -32,7 +37,8 @@ class GetNumsController extends BaseController{
                 $this->returnSuccessResponse($num);
                 break;
             default:
-                echo 'asf';
+                $this->returnErrorResponse(4001,'参数不正确');
+                break;
         }
 
 

@@ -48,9 +48,9 @@ $api->version('v1', [
     ]);
 
     //1005获取号码
-    $api->get('genid/{type}', [
-        'uses' => 'GetNumsController@getGenid',
-    ]);
+//    $api->get('genid/{type}', [
+//        'uses' => 'GetNumsController@getGenid',
+//    ]);
 
 
 

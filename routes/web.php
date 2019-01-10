@@ -17,3 +17,5 @@ $router->get('/', function () use ($router) {
 });
 
 
+//1005获取号码
+$router->get('/genid/{type}', 'Api\V1\GetNumsController@getGenid');
