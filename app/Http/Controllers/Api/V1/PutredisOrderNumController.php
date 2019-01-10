@@ -40,7 +40,7 @@ class PutredisOrderNumController extends BaseController{
     public function handleOrderNum(){
         $len = $this->checkOrderNum();
 
-        if ($len <= config('generator.order_len_limit') ){
+        if ($len <= config('generator.order_redis_len_limit') ){
             $this->putRedisOrderNum();
         }
     }

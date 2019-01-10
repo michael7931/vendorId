@@ -40,18 +40,32 @@ class OrderNumlogReorganize extends BaseReorganize {
     }
 
     public function addOrderNumlogdbIncrementnum(){
-        $tableLastId = $this->getLastId();
-        $insertNum = config('generator.order_init_num') + $tableLastId;
-        $genNumArr = $this->generateNum($insertNum);
-        $insertRes = $this->insertDatas($genNumArr);
+        $extCount = $this->countEcDel();
+        $lenLimit = config('generator.orderdb_len_limit');
+
+        if ( $extCount <= $lenLimit ){
+            $tableLastId = $this->getLastId();
+            $insertNum = config('generator.order_init_num') + $tableLastId;
+            $genNumArr = $this->generateNum($insertNum);
+            $insertRes = $this->insertDatas($genNumArr);
+        }
+
     }
+
+
+    public function countEcDel(){
+        $numModel = new OrderNumlog();
+        $count = $numModel->where('deleted_at','=',0)->count();
+        return $count?$count:0;
+    }
+
 
     /**
      * 获取订单号码
      */
     public function getOrderNum(){
         $numModel = new OrderNumlog();
-        $takeAmount = config('generator.order_onestep');
+        $takeAmount = config('generator.order_redis_onestep');
 //        $list = $numModel->orderBy('id','asc')->take($takeAmount)->get();
         $list = $numModel->where('nums', '!=', 0)->where('deleted_at','=',0)
             ->orderBy('id', 'asc')->take($takeAmount)->get();

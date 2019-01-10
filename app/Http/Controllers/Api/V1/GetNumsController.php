@@ -19,7 +19,7 @@ class GetNumsController extends BaseController{
                     $this->returnErrorResponse(4000,'号码不足，请联系管理员补充号码。邮件2230538502@qq.com');
                 }
                 $orderNumsModel = new onR();
-                $orderNumsModel->delByNums($num);
+//                $orderNumsModel->delByNums($num);
                 $this->returnSuccessResponse($num);
                 break;
             case 2:
@@ -28,7 +28,7 @@ class GetNumsController extends BaseController{
                     $this->returnErrorResponse(4000,'号码不足，请联系管理员补充号码。邮件2230538502@qq.com');
                 }
                 $streamNumsModel = new snR();
-                $streamNumsModel->delByNums($num);
+//                $streamNumsModel->delByNums($num);
                 $this->returnSuccessResponse($num);
                 break;
             default:

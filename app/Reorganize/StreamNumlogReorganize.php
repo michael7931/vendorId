@@ -37,10 +37,21 @@ class StreamNumlogReorganize extends BaseReorganize {
     }
 
     public function addStreamNumlogdbIncrementnum() {
-        $tableLastId = $this->getLastId();
-        $insertNum = config('generator.stream_init_num') + $tableLastId;
-        $genNumArr = $this->generateNum( $insertNum );
-        $insertRes = $this->insertDatas($genNumArr);
+        $extCount = $this->countEcDel();
+        $lenLimit = config('generator.streamdb_len_limit');
+        
+        if( $extCount <= $lenLimit ){
+            $tableLastId = $this->getLastId();
+            $insertNum = config('generator.stream_init_num') + $tableLastId;
+            $genNumArr = $this->generateNum( $insertNum );
+            $insertRes = $this->insertDatas($genNumArr);
+        }
+    }
+
+    public function countEcDel(){
+        $numModel = new StreamNumlog();
+        $count = $numModel->where('deleted_at','=',0)->count();
+        return $count?$count:0;
     }
 
 
@@ -49,7 +60,7 @@ class StreamNumlogReorganize extends BaseReorganize {
      */
     public function getStreamNum() {
         $numModel   = new StreamNumlog();
-        $takeAmount = config('generator.stream_onestep');
+        $takeAmount = config('generator.stream_redis_onestep');
         $list = $numModel->where('nums', '!=', 0)->where('deleted_at','=',0)
                 ->orderBy('id', 'asc')->take($takeAmount)->get();
 

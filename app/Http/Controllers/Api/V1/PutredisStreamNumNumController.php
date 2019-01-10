@@ -40,7 +40,7 @@ class PutredisStreamNumNumController extends BaseController{
     public function handleStreamNum(){
         $len = $this->checkStreamNum();
 
-        if ($len <= config('generator.stream_len_limit') ){
+        if ($len <= config('generator.stream_redis_len_limit') ){
             $this->putRedisStreamNum();
         }
 
